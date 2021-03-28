@@ -1,0 +1,189 @@
+---
+title: Module's Programming Assignment
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = '')
+library(dplyr)
+library(tidyr)
+library(readr)
+library(readxl)
+```
+<style>
+  body {
+    text-align: justify}
+</style>
+
+## 1.
+
+Use the readr package to read the daily_SPEC_2014.csv.bz2 data file in to R. This file
+contains daily levels of fine particulate matter (PM2.5) chemical constituents across the
+United States. The data are measured at a network of federal, state, and local monitors and
+assembled by the EPA.
+
+In this dataset, the "Sample.Value" column provides the level of the indicated chemical
+constituent and the "Parameter.Name" column provides the name of the chemical constituent.
+The combination of a "State.Code", a "County.Code", and a "Site.Num", uniquely identifies a
+monitoring site (the location of which is provided by the "Latitude" and "Longitude"
+columns).
+
+For all of the questions below, you can ignore the missing values in the dataset, so when
+taking averages, just remove the missing values before taking the average (i.e. you can use
+na.rm = TRUE in the mean() function)
+
+What is average Arithmetic.Mean for “Bromine PM2.5 LC” in the state of Wisconsin in this
+dataset?
+
+<u>answer</u>
+
+```{r a1}
+data <- read_csv('data/daily_SPEC_2014.csv.bz2',progress = FALSE)
+names(data) ## take a look at the column names
+names(data) <- gsub('\\s','.',names(data))
+names(data)[3] <- "Site.Number"
+sapply(data,class) ## to see the class of each column
+for (i in 1:3) data[,i] <- as.numeric(unlist(data[,i]))
+rm(i)
+data %>% filter(Parameter.Name == "Bromine PM2.5 LC",State.Name == "Wisconsin") %>% 
+  summarise(average_mean = mean(Arithmetic.Mean,na.rm = TRUE))
+```
+
+## 2.
+
+Calculate the average of each chemical constituent across all states, monitoring sites and all time 
+points.
+
+Which constituent Parameter.Name has the highest average level?
+
+<u>answer</u>
+
+```{r a2}
+data %>% group_by(State.Name,Site.Number,Date.Local,Parameter.Name) %>% 
+  summarise(Average.Level = mean(Arithmetic.Mean,na.rm = TRUE)) %>% arrange(desc(Average.Level)) %>%
+  head(1)
+```
+
+## 3.
+
+Which monitoring site has the highest average level of “Sulfate PM2.5 LC” across all time?
+
+Indicate the state code, county code, and site number.
+
+<u>answer</u>
+
+```{r a3}
+data %>% group_by(State.Code,County.Code,Site.Number) %>% 
+  filter(Parameter.Name == "Sulfate PM2.5 LC") %>% 
+  summarise(Average.Level = mean(Arithmetic.Mean,na.rm = TRUE)) %>% arrange(desc(Average.Level)) %>%
+  head(1)
+```
+
+## 4.
+
+What is the absolute difference in the average levels of “EC PM2.5 LC TOR” between the states California
+and Arizona, across all time and all monitoring sites?
+
+<u>answer</u>
+
+```{r a4}
+data %>% filter(Parameter.Name == "EC PM2.5 LC TOR",State.Name %in% c("California","Arizona")) %>% 
+  group_by(State.Name) %>% summarise(Average.Levels = mean(Arithmetic.Mean,na.rm = TRUE)) %>% 
+  ungroup %>%
+  transmute(Abs.Difference = abs(max(Average.Levels) - min(Average.Levels))) %>% head(1)
+```
+
+## 5.
+
+What is the median level of “OC PM2.5 LC TOR” in the western United States, across all time? Define
+western as any monitoring location that has a Longitude LESS THAN -100.
+
+<u>answer</u>
+
+```{r a5}
+data %>% filter(Parameter.Name == "OC PM2.5 LC TOR",Longitude < -100) %>% group_by(Parameter.Name) %>% 
+  summarise(Median.Level = median(Arithmetic.Mean,na.rm = TRUE)) 
+```
+
+## 6.
+
+Use the readxl package to read the file aqs_sites.xlsx into R (you may need to install the package
+first). This file contains metadata about each of the monitoring sites in the EPA’s monitoring system.
+In particular, the "Land Use" and "Location Setting" variables contain information about what kinds of 
+areas the monitors are located in (i.e. “residential” vs. “forest”).
+
+How many monitoring sites are labelled as both RESIDENTIAL for "Land Use" and SUBURBAN for "Location 
+Setting"?
+
+<u>answer</u>
+
+```{r a6}
+data1 <- read_excel('data/aqs_sites.xlsx')
+names(data1) <- gsub("\\s",".",names(data1))
+data1 %>% filter(Land.Use == "RESIDENTIAL",Location.Setting == "SUBURBAN") %>% nrow
+```
+
+## 7.
+
+What is the median level of “EC PM2.5 LC TOR” amongst monitoring sites that are labelled as both
+“RESIDENTIAL” and “SUBURBAN” in the eastern U.S., where eastern is defined as Longitude greater than or
+equal to -100?
+
+<u>answer</u>
+
+```{r a7}
+joined <- left_join(data,data1,by = c("State.Code","County.Code","Site.Number"))
+joined %>% filter(Land.Use == "RESIDENTIAL",Location.Setting == "SUBURBAN",Longitude.x >= -100,
+                  Parameter.Name == "EC PM2.5 LC TOR") %>% group_by(Parameter.Name) %>% 
+  summarise(Median.Level = median(Arithmetic.Mean,na.rm = TRUE))
+```
+
+## 8.
+
+Amongst monitoring sites that are labeled as COMMERCIAL for “Land Use”, which month of the year has the 
+highest average levels of “Sulfate PM2.5 LC”?
+
+<u>answer</u>
+
+```{r a8}
+joined %>% filter(Land.Use == "COMMERCIAL",Parameter.Name == "Sulfate PM2.5 LC") %>% 
+  mutate(Date.Local = months(Date.Local,abbreviate = FALSE)) %>%
+  group_by(Date.Local) %>% summarise(Mean.Level = mean(Arithmetic.Mean,na.rm = TRUE)) %>% 
+  arrange(desc(Mean.Level))
+```
+
+## 9.
+
+Take a look at the data for the monitoring site identified by State Code 6, County Code 65, and Site 
+Number 8001 (this monitor is in California). At this monitor, for how many days is the sum of “Sulfate 
+PM2.5 LC” and “Total Nitrate PM2.5 LC” greater than 10?
+
+<u>answer</u>
+
+```{r a9}
+rm(joined)
+data %>% filter(State.Code == 6,County.Code == 65,Site.Number == 8001,
+                Parameter.Name %in% c("Sulfate PM2.5 LC","Total Nitrate PM2.5 LC")) %>% 
+  select(Date.Local,Parameter.Name,Arithmetic.Mean) %>% group_by(Date.Local,Parameter.Name) %>% 
+  summarise(Average.Level = mean(Arithmetic.Mean,na.rm = TRUE)) %>% group_by(Date.Local) %>% 
+  spread(key = Parameter.Name,value = Average.Level) %>% mutate(Total = `Sulfate PM2.5 LC` + 
+        `Total Nitrate PM2.5 LC`) %>% filter(Total > 10) %>% nrow
+```
+
+## 10.
+
+Which monitoring site in the dataset has the highest correlation between “Sulfate PM2.5 LC” and “Total 
+Nitrate PM2.5 LC” across all dates? Identify the monitoring site by it’s State, County, and Site Number 
+code.
+
+<u>answer</u>
+
+```{r a10}
+data %>% filter(Parameter.Name %in% c("Sulfate PM2.5 LC","Total Nitrate PM2.5 LC")) %>% 
+  group_by(State.Code,County.Code,Site.Number,Parameter.Name,Date.Local) %>% 
+  summarise(Average.Level = mean(Arithmetic.Mean,na.rm = TRUE)) %>% spread(key = Parameter.Name,value =
+  Average.Level) %>% group_by(State.Code,County.Code,Site.Number) %>%
+  summarise(Cor = cor(`Sulfate PM2.5 LC`,`Total Nitrate PM2.5 LC`)) %>% arrange(desc(Cor))
+rm(data)
+rm(data1)
+```
