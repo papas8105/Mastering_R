@@ -1,0 +1,118 @@
+---
+title: "Quiz"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+<style>
+  body {
+    text-align: justify}
+</style>
+
+## Question 1.
+
+```{r q1}
+question("Debugging is the process of: ",
+         answer("writing code that is as fast as possible."),
+         answer("getting your expectations about code behavior to converge with reality.",
+                correct = TRUE),
+         answer("writing code that uses memory efficiently."),
+         answer("handling errors in a nonstandard manner."))
+```
+
+## Question 2.
+
+```{r q2}
+question("Which of the following functions initiates an interactive debugging 
+         environment that allows you to step through code one expression at a time?",
+         answer("browser()",correct = TRUE),
+         answer("try()"),answer("tryCatch()"),answer("stop()"))
+```
+
+## Question 3.
+
+```{r q3}
+question("Which of the following functions allows you to temporarily insert pieces of
+         code into other functions to modify their behavior?",
+         answer("trace()",correct = TRUE),answer("debug()"),answer("recover()"),
+         answer("browser()"))
+```
+
+## Question 4.
+
+```{r q4}
+question("What does traceback() function do?",
+         answer("Sets the debugging flag for a function."),
+         answer("Returns the state of the function call stack just before an error
+                occured.",correct = TRUE),
+         answer("Pauses execution of a function."),
+         answer("Evaluates an expression and returns an object of 'try-error' if
+                error occurs."))
+```
+
+## Question 5
+
+```{r q5}
+question("When should the traceback() function be called?",
+         answer("Only while debugging inside a function."),
+         answer("Immediately after a warning occurs."),
+         answer("Any time after an error occurs."),
+         answer("Immediately after an error occurs.",correct = TRUE))
+```
+
+## Question 6.
+
+```{r q6}
+question("What does calling trace('f') for function 'f()' do?",
+         answer("Whenever f() is called, it will enter the interactive debugger."),
+         answer("Whenever f() is called, a message is printed to the console indicating 
+                that the function was called.",correct = TRUE),
+         answer("It generates a log file containing debugging information."),
+         answer("Whenever f() is called, the function call stack is written to a file."))
+```
+
+## Question 7.
+
+```{r q7}
+question("What is the microbenchmark package useful for?",
+         answer("Interactively debugging functions."),
+         answer("Modifying in other developers' packages."),
+         answer("Handling warnings and errors in non-standard ways."),
+         answer("Comparing the speed of several functions that do the same thing.",
+                correct = TRUE))
+```
+
+## Question 8.
+
+```{r q8}
+question("What does the Rprof() function do?",
+         answer("Writes out the function call stack at user-specified intervals of
+                time.",correct = TRUE),
+         answer("Re-formats your code to adhere to standards."),
+         answer("Analyzes your code for potential bugs."),
+         answer("Visualizes the time behavior of R code."))
+```
+
+## Question 9
+
+```{r q9}
+question("What does the profvis() function do?",
+         answer("Prints debugging information to the console."),
+         answer("Displays profiling informantion in an interactive visualtization in
+                RStudio.",correct = TRUE),
+         answer("Writes a log file of the function call stack."),
+         answer("Visualizes code that runs quickly (in less than 10 miliseconds)."))
+```
+
+## Question 10.
+
+```{r q10}
+question("Which function is better for analyzing fast-running functions: provis() or 
+         microbenchmark()?",
+         answer("profvis()",correct = TRUE),
+         answer("microbenchmark()"))
+```
