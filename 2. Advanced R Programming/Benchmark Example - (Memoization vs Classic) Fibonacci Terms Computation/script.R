@@ -42,11 +42,11 @@ memo_data %<>% gather(num,time) %>% group_by(num) %>%
   summarise(med_time = median(time))
 
 ## Plotting
-g <- ggplot(data = fib_data) 
-g <- g + geom_point(aes(x = num,y = med_time,color = 'fib'),cex = 2,alpha = .7)
-g <- g %+% geom_point(data = memo_data,
-                      aes(x = num,y = med_time,color = "fib_mem"),
-                      cex = 2,alpha = .7)
+fib_data$technique <- "recursion"
+memo_data$technique <- "memoization"
+data <- rbind(fib_data,memo_data)
+g <- ggplot(data)
+g <- g + geom_point(aes(x = num,y = med_time,color = technique),cex = 2,alpha = .7)
 g + xlab("fibonacci term") + ylab("median time of computation per term (nanosec)") +
   theme_bw()
 
