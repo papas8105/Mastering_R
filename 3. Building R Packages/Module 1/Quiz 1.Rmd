@@ -1,0 +1,136 @@
+---
+title: "Quiz 1"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<style>
+  body {
+    text-align: justify}
+</style>
+
+### Question 1.
+
+```{r q1}
+question("Which of the following are good reasons to build an R Package?",
+         answer("R Packages require documentation and the package structure allows you to distribute
+         functions and documentation together.",correct = TRUE),
+         answer("Users need to understand how your R functions work in order to use them and
+         providing users with a package allows them to read your R code."),
+         answer("An R package is a good method for distributing functions to users.",
+                correct = TRUE),
+         answer("R functions are only available for use in other programming languages (Python, C++)
+         if they're included in a package."))
+```
+
+### Question 2.
+
+```{r q2}
+question("Which of the following files and folders are required in an R package?",
+         answer("An inst/ directory."),
+         answer("A NAMESPACE file.",correct = TRUE),
+         answer("The `man/` directory.",correct = TRUE),
+         answer("A README.md file."),
+         answer("A DESCRIPTION file.",correct = TRUE),
+         answer("The `R/` directory.",correct = TRUE))
+```
+
+### Question 3.
+
+```{r q3}
+question("Which of the following files and subdirectories will be included in the initial package
+         directory if you create a new package using the `create` function from `devtools`?",
+         answer("README.md"),
+         answer("`R/` subdirectory",correct = TRUE),
+         answer(".gitignore",correct = TRUE),
+         answer("R project file (package name plus a `.Rproj` extension)",correct = TRUE),
+         answer("`data/` subdirectory"),
+         answer("`man/` subdirectory"),
+         answer("DESCRIPTION",correct = TRUE),
+         answer("NAMESPACE",correct =TRUE),
+         answer(".Rbuildignore",correct = TRUE),
+         answer("'`vignettes/` subdirectory"),
+         answer("README.Rmd"))
+```
+
+### Question 4.
+
+```{r q4}
+question("Which of the following functions from the `devtools` package are you likely to use often, rather than
+         just once per package, when building a package?",
+         answer("`document`",correct = TRUE),
+         answer("`use_readme_rmd`"),
+         answer("`load_all`",correct = TRUE),
+         answer("`create`"))
+```
+
+### Question 5.
+
+```{r q5}
+question("What is the purpose of the DESCRIPTION file in a package?",
+         answer("It describes all the functions that are exported by the package."),
+         answer("It provides metadata on the package, including the package name, version number,
+                authors, and dependencies.",correct = TRUE),
+         answer("It describes some of the R project options for the package."),
+         answer("It provides a tutorial overview of how to use the package and is typically 
+         written in R Markdown."))
+```
+
+### Question 6.
+
+```{r q6}
+question("Which of the following statements correctly describes how R functions should be defined with
+         the package directory?",
+         answer("They should all be defined in either a single or multiple R scripts in the
+         `R/` subdirectory.",correct = TRUE),
+         answer("They should all be defined in separate R scripts in the `man/` subdirectory."),
+         answer("They should all be defined in separate R scripts (one per function) in
+         the `R/` subdirectory."),
+         answer("They should all be defined in a single R script, saved as the NAMESPACE file."))
+```
+
+### Question 7.
+
+```{r q7}
+question("What does the ::: operator do?",
+         answer("It hides functions in a package to make them inaccessible to the user."),
+         answer("It prevents users from modifying the code in a function."),
+         answer("It allows access to unexported functions in a package.",correct = TRUE),
+         answer("It exports functions from a package for others to use."))
+```
+
+### Question 8.
+
+```{r q8}
+question("How is attaching a package namespace different from loading a namespace?",
+         answer("Loading a namespace places a package's functions in the global environment."),
+         answer("Attaching a namespace makes functions visible only to the package that 
+                attached the namespace."),
+         answer("Loading a namespace makes unexported functions in a package visible to the user."),
+         answer("Attaching a namespace places the namespace on the search list",correct = TRUE))
+```
+
+### Question 9.
+
+```{r q9}
+question("For packages that require C code, what should be installed on your system?",
+         answer("The appropriate header files."),
+         answer("A C compiler from Xcode, Rtools, or equivalent package.",correct = TRUE),
+         answer("A perl interpreter."),
+         answer("A Fortran compiler."))
+```
+
+### Question 10.
+
+```{r q10}
+question("What is the purpose of the Imports field in the DESCRIPTION file?",
+         answer("To indicate the license under which your package is made available."),
+         answer("To indicate the version of R that is required for your package."),
+         answer("To provide a brief description of what your package does."),
+         answer("To indicate the packages whose functions will be used in your package.",correct = TRUE))
+```
