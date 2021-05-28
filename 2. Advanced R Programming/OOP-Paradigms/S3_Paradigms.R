@@ -27,7 +27,7 @@ shape_S3 <- function(side_lengths) {
 ## Define objects of class shape_S3
 
 square_4 <- shape_S3(c(4,4,4,4))
-class(square_4) #### ---> "shape_S3"
+class(square_4)   #### ---> "shape_S3"
 triangle_3 <- shape_S3(c(3,3,3))
 class(triangle_3) #### ---> "shape_S3"
 
@@ -46,15 +46,18 @@ is_square.shape_S3 <- function(obj) {
 }
 
 ## do some tests
+
 is_square(square_4)
 is_square(triangle_3)
 
 ## define default state if the input for is_square is not a shape_S3 class
+
 is_square.default <- function(obj) {
   NA
 }
 
 ## Tests
+
 is_square("square")   #---> NA
 is_square(c(1,1,1,1)) #---> TRUE
 
@@ -64,6 +67,7 @@ print(square_4)
 
 ## We don't want the previous result so we will create a generic print function
 ## to work with shape_S3
+
 print.shape_S3 <- function(obj) {
   if (length(obj$side_lengths) == 3) {
     paste("A triangle with side lengths of",obj$side_lengths[1],
@@ -93,6 +97,7 @@ print(shape_S3(c(1,2,3,4)))
 head(methods(print),10)
 
 ## Inheritance
+
 class(square_4)
 class(square_4) <- c("shape_S3","square")
 class(square_4)
@@ -110,6 +115,7 @@ make_poly <- function(x,y) {
 }
 
 ## Define print method for polygon
+
 print.polygon <- function(x,...) {
   cat("a polygon with",length(x$xcoord),"vertices\n")
   invisible(x)
@@ -125,6 +131,7 @@ summary.polygon <- function(object,...) {
 
 ## print method for summary.polygon objects
 ## x is an object of class "summary_polygon"
+
 print.summary_polygon <- function(x,...) {
   cat("x:",x$rng.x[1],"-->",x$rng.x[2],"\n")
   cat("y:",x$rng.y[1],"-->",x$rng.y[2],"\n")
@@ -132,6 +139,7 @@ print.summary_polygon <- function(x,...) {
 }
 
 ## construct a new "polygon" object
+
 x <- make_poly(1:4,c(1,5,2,1))
 print(x)
 out <- summary(x)

@@ -1,10 +1,10 @@
-> ## Read in the data
+> ## Read in the data, set the wd to ../Programming Assignment 2
 > library(readr)
 > library(magrittr)
 > source("oop_code.R")
 > ## Load any other packages that you may need to execute your code
 > 
-> data <- read_csv("data/MIE.csv")
+> data <- read_csv("../data/MIE.csv")
 > x <- make_LD(data)
 > print(class(x))
 [1] "LongitudinalData"

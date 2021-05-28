@@ -1,4 +1,5 @@
-## try catch function with error, warning and finallly
+## try catch function with error, warning and finally
+
 try_catch <- function(expr) {
   tryCatch(expr,
            error = function(e) {

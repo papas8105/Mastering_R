@@ -1,6 +1,7 @@
 ## Recursion compute all terms until the final result
+
 fib <- function(n) {
-  stopifnot(n > 0)
+  stopifnot(n > 0 & floor(n) == n)
   if (n == 1) {
     0
   } else if (n == 2) {
@@ -11,10 +12,11 @@ fib <- function(n) {
 }
 
 ## Memoization technique
+
 fib_tbl <- c(0,1,rep(NA,23))
 
 fib_mem <- function(n) {
-  stopifnot(n > 0)
+  stopifnot(n > 0 & floor(n) == n)
   if (!is.na(fib_tbl[n])) {
     fib_tbl[n]
   } else {

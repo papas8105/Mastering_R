@@ -1,8 +1,4 @@
 ## Instructions
-<style>
-  body {
-    text-align: justify}
-</style>
 
 The purpose of this assessment is to document some R functions using __roxygen2__ style 
 comments that would eventually be translated into R documentation files. For this 
