@@ -3,7 +3,7 @@
 if(!require(tidyr)) install.packages("tidyr")
 if(!require(dplyr)) install.packages("dplyr")
 
-## Inititialize the LongitudinalData class object
+## Initialize the LongitudinalData class object
 
 make_LD <- function(data) {
   structure(list(LD = nest(.data = data,data = -id)),class = "LongitudinalData")

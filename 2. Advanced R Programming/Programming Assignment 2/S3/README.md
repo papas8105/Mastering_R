@@ -1,0 +1,1 @@
+We will use the S3 OOP system since it more abstract and can turn a "method" into a class easily.
