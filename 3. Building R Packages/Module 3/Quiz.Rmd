@@ -1,0 +1,120 @@
+---
+title: "Quiz"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<style>
+  body {
+    text-align: justify}
+</style>
+
+## Question 1.
+
+```{r q1}
+question("Which of the following software licenses reserves the fewest rights for
+         the creator of the software?",
+         answer("Artistic-2.0"),answer("GPL"),answer("MIT"),answer("CC0",correct = TRUE),
+         answer("The Apple iTunes EULA"),
+         answer("The deal that Faust makes with Mephistopheles"))
+```
+
+## Question 2.
+
+```{r q2}
+question("Which of the following are good reasons for open sourcing your software?",
+         answer("Publishing open source software is a meaningful way to contribute to
+         the community of any programming language.",correct = TRUE),
+         answer("The chance that you'll make money from software you write is so small 
+         that you might as well just give it away for free."),
+         answer("The more people that are able to view and submit changes to the code,
+         the more likely that the code will contain fewer bugs.",correct = TRUE),
+         answer("Open source licensing ensures that there are no limits to how others
+         can use your software."))
+```
+
+## Question 3.
+
+```{r q3}
+question("How might incorporating testing into your R package have implications for code design?",
+         answer("a testing framework may affect the indenting of your code"),
+         answer("dividing your code into smaller functions allows you to test individual pieces more 
+         effectively",correct = TRUE),
+         answer("giving your functions similar sounding names makes it easier to 
+         setup a testing framework`"),
+         answer("a few large functions makes testing run faster"))
+```
+
+## Question 4.
+
+```{r q4}
+question("When a test fails in a call to expect_that(), what happens?",
+         answer("The expect_that() function returns FALSE"),
+         answer("A warning is given"),
+         answer("The expect_that() function returns NULL"),
+         answer("An error is thrown",correct = TRUE))
+```
+
+## Question 5.
+
+```{r q5}
+question("What does the is_a() function do in the context of testthat?",
+         answer("checks the class of an object",correct = TRUE),
+         answer("it is like equals() but ignores object attributes"),
+         answer("checks that a string matches a regular expression"),
+         answer("check for equality with numerical fuzz"))
+```
+
+## Question 6.
+
+```{r q6}
+question("In which sub-directory of an R package should tests be placed?",
+         answer("src/"),answer("man/"),answer("tests/",correct = TRUE),
+         answer("R/"))
+```
+
+## Question 7.
+
+```{r q7}
+question("What is Git?",
+         answer("an interactive development environment"),
+         answer("a web site for hosting source code repositories"),
+         answer("a compiler for R code"),
+         answer("a version control system",correct = TRUE))
+```
+
+## Question 8.
+
+```{r q8}
+question("What is a pull request on GitHub?",
+         answer("a thread in a discussion forum"), 
+         answer("a copy of an existing repository"),
+         answer("a way to suggest changes to a repository that you do not own",correct = TRUE),
+         answer("a way to recreate a repository on your local machine"))
+```
+
+## Question 9.
+
+```{r q9}
+question("How can a merge conflict be resolved?",
+         answer("clone the repository with the conflicted code"),
+         answer("choose the code you want to use and delete everything else",correct = TRUE),
+         answer("send a pull request for one of your repositories"),
+         answer("git can resolve all merge conflicts automatically"))
+```
+
+## Question 10.
+
+```{r q10}
+question("The GNU General Public License is called a copyleft license because",
+         answer("the GPL prohibits any modification of the source code of software"),
+         answer("the GPL prohibits distribution of the software under any circumstances"),
+         answer("any software that is bundled with or orginates from software
+         licensed under the GPL must also be released under the GPL",correct = TRUE),
+         answer("the software can be modified and distributed without accompanying source code"))
+```

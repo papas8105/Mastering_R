@@ -61,8 +61,8 @@ question("Which of the following files and subdirectories will be included in th
 ### Question 4.
 
 ```{r q4}
-question("Which of the following functions from the `devtools` package are you likely to use often, rather than
-         just once per package, when building a package?",
+question("Which of the following functions from the `devtools` package are you likely to use often,
+         rather than just once per package, when building a package?",
          answer("`document`",correct = TRUE),
          answer("`use_readme_rmd`"),
          answer("`load_all`",correct = TRUE),
