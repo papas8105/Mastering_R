@@ -1,0 +1,15 @@
+fars_map_state          fars_map_state: Displays a plot with a state
+                        map including the accidents location by year
+                        Get data based on year, state number. filter
+                        records based on state num passed. If
+                        'state.num' does not exist throws message no
+                        accidents for that state. else generate plot
+                        with no null values for Logitude > 900 and
+                        latitude > 90. Plots based on States and for a
+                        particular year. x axis Logitude, y axis
+                        Latitude. No null values.
+fars_read               Motor Vehicle Traffic Injuries
+fars_read_years         fars_read_years:Load accidents by Year & Month.
+fars_summarize_years    fars_summarize_years: No.of Accidents per
+                        Month/Year
+make_filename           make_filename: Print file Name
