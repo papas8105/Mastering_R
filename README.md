@@ -7,6 +7,16 @@ Book can be downloaded [here](https://leanpub.com/msdr/).</br>
 
 Swirl Courses: </br>
 
+Install swirl:
+
 * install.packages("swirl")
-* install_course("The R Programming Environment")
-* install_course("Advanced R Programming")
+
+Install courses:
+
+* swirl::install_course("The R Programming Environment")
+* swirl::install_course("Advanced R Programming")
+
+
+### Data Sets For Building Data Visualization Tools
+
+[here](bit.ly/3NLFfHD)

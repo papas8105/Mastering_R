@@ -1,0 +1,120 @@
+---
+title: "Quiz 3"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+<style>
+  body {
+    text-align: justify}
+</style>
+
+### Question 1.
+
+```{r q1}
+question("You want to customize the color scale, theme elements, and include a mathematical equation in the 
+         title of a faceted scatterplot. Is it necessary to create the plot using grid graphics rather than
+         ggplot2?",
+         answer("Yes, because this code requires too much customization to plot using ggplot2, you should consider 
+                coding it using grid graphics."),
+         answer("No, you do not need to code this plot in grid graphics (although you could).",correct = TRUE))
+```
+
+```{r q2}
+question_checkbox("Which of the following types of objects are created with grid graphics, either directly or 
+                  using a package build on grid graphics?",
+                  answer("A grob object.",correct = TRUE),
+                  answer("A map created with ggmap.",correct = TRUE),
+                  answer("A plot created using R's base graphics."),
+                  answer("A map created by running a plot call on as SpatialPoints object."),
+                  answer("A ggplot object.",correct = TRUE))
+```
+
+```{r q3}
+question("How can you customize the aesthetics of a grob, like color and line style, when creating the grob?",
+         answer("Use key-value pairs within a list as the input to the aes parameter of the grob family function. 
+                For example: <pre>
+                circleGrob(x = 0.5,y = 0.5,r = 0.5,
+                    aes(list(col = 'grey')))
+                </pre>"),
+         answer("Add an aesthetic statement, using the aes, function, to the grob once it's been created. For 
+                example: <pre>
+                circleGrob(x = 0.5,y = 0.5,r = 0.5) + 
+                    aes = list(col = 'grey')
+                </pre>"),
+         answer("Use key-value pairs within a call to the gpar function as the input to the gp parameter of the 
+                grob family function. For example: <pre>
+                circleGrob(x= 0.5,y = 0.5,r = 0.5,
+                    gp = gpar(col = 'grey'))
+                </pre>",correct = TRUE),
+         answer("Use key-value pairs within a call to the aes function as the input to the gp parameter of the 
+                grob family function. For example: <pre>
+                circleGrob(x = 0.5,y = 0.5,r = 0.5,
+                    gp = aes(col = 'grey')
+                </pre>"))
+```
+
+### Question 4.
+
+```{r q4}
+question("TRUE of FALSE: You use viewports to create new graphical elements when using grid graphics.",
+         answer("TRUE"),answer("FALSE",correct = TRUE))
+```
+
+### Question 5.
+
+```{r q5} 
+question("Which of the following are graphical elements can you create in an R plot using one of the grob 
+         family of functions from the grid package?",
+         answer("Text",correct = TRUE),answer("Table"),
+         answer("x- and y- axes",correct = TRUE),answer("Point",correct = TRUE),
+         answer("Polygon",correct = TRUE),answer("Line",correct = TRUE))
+```
+
+### Question 6.
+
+```{r q6}
+question("What is the name of the plotting windows that you can move into and out of to customize plots 
+         grid graphics?",
+         answer("Ports"),answer("Viewports",correct = TRUE),answer("Grobs"),answer("Popups"))
+```
+
+### Question 7.
+
+```{r q7}
+question("Which of the following tasks can be done using the grid.arrange function in the gridExtra package?",
+         answer("Draw a single grob to the current graphics device.",correct = TRUE),
+         answer("Draw multiple ggplot objects to the current graphics device",correct = TRUE),
+         answer("Draw multiple base plots to the current graphics device."),
+         answer("Rearrange the order of grobs in a gTree grob."),
+         answer("Draw multiple grobs to the current graphics device",correct = TRUE))
+
+```
+
+### Question 8.
+
+```{r q8}
+question("Which of the following are possible units that can be used with grid graphics coordinate systems?",
+         answer("grob"),answer("cm",correct = TRUE),answer("native",correct = TRUE),
+         answer("viewport"),answer("npc",correct = TRUE))
+```
+
+### Question 9.
+
+```{r q9} # wrong
+question("If you have to integrate base graphics and grid graphics output, what is the name of the package 
+         that can be used to do that?",
+         answer("ggplot2"),answer("grid"),answer("gridExtra"),answer("gridBase",correct = TRUE))
+```
+
+### Question 10.
+
+```{r q10}
+question("What graphics systems is ggplot built on?",
+         answer("Grid graphics.",correct = TRUE),answer("Base graphics."),
+         answer("Lattice graphics."),answer("The tidyverse."))
+```

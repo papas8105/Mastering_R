@@ -1,0 +1,201 @@
+---
+title: "Quiz 2"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+<style>
+  body {
+    text-align: justify}
+</style>
+
+### Question 1.
+<b>Consider the following data frame of points along the US border.</b>
+
+```{r q1a,echo = TRUE}
+library(ggplot2)
+us_map <- map_data("usa")
+head(us_map,3)
+```
+
+```{r q1b}
+question("If you wanted to use this data to map the outline of the United States without converting 
+         the data to a spatial object, how would you map aesthetics in the ggplot call, and which 
+         geom would you add?",
+         answer("For the aesthetics, I would map long to x, lat to y and group to group. I would 
+                then add a path geom.",correct = TRUE),
+         answer("For the aesthetics, I would map long to x, lat to y and group to group. I would then 
+                add a line geom."),
+         answer("For the aesthetics, I would map lat to x, long to y and group to group. I would 
+                then add a line geom."),
+         answer("For the aesthetics, I would map lat to x and long to y. I would then add a 
+                polygon geom."))
+```
+
+### Question 2.
+
+```{r q2}
+question("If you have a SpatialPointsDataframe object that you would like to use for mapping, why might 
+         you want to convert it to a data frame object and how would you do it?",
+         answer("You may want to convert it because some plotting and mapping methods, include ggplot2 and 
+         ggmap, will only input a data frame. To convert it, you could use the fortify function from ggplot2.",
+         correct = TRUE),
+         answer("You may want to convert it because data frames can be more easily manipulated with 
+                tidyverse tools. To convert it, you could use the data_frame function from the dplyr package."),
+         answer("You may want to convert it because data frames are easier to write out to shapefiles. To 
+                convert it, you could use the as.data.frame function."),
+         answer("A data frame that includes geographical information can be mapped by just running the plot function. 
+                To convert it, you could use the readShapePoints function from the maptools package.")
+         )
+```
+
+### Question 3. 
+
+```{r q3}
+question("Which of the following are geographic tasks can you do using functions from the ggmap package?",
+         answer("Compute map distances using Google Maps.",correct = TRUE),
+         answer("Plot a ggmap object using the ggmap function.",correct = TRUE),
+         answer("Geocode addresses or other locations by inputting a character string with the address or 
+                location and getting back latitude and longitude using the Google Maps API.",correct = TRUE),
+         answer("Reproject projected spatial data."),
+         answer("Get a base map for a certain location from GoogleMaps to which you can later add points, 
+                polygons and other shapes.",correct = TRUE),
+         answer("Calculate the area of spatial polygons (e.g. calculate the area of US states based on 
+                a SpatialPolygons object)."))
+```
+
+### Question 4. 
+
+<b>The following code uses ggmap to plot the walking route between the US White House and the US Capitol Building:</b>
+
+```{r q4a,echo = TRUE,eval = FALSE}
+library(ggmap)
+inauguration_route <- route(from = "US Capitol Building",
+                            to = "White House",
+                            structure = "route",
+                            mode = "walking")
+inaug_route_map <- get_map("Metro Center, Washington DC", 
+                           zoom = 14) %>% 
+    ggmap(extent = "device") + geom_path(data = inauguration_route,color = "darkred",size = 1.1)
+```
+
+<b>Say you have the following data frame with the addresses of a few hotels:</b>
+
+```{r q4b,echo = TRUE,eval = FALSE}
+library(dplyr)
+dc_hotels <- data_frame(address = 
+                            c("1401 Pennsylvania Ave NW, Washington DC",
+                              "1331 Pennsylvania Ave NW, Washington DC")) %>% 
+    bind_cols(geocode(dc_hotels$address)) 
+dc_hotels
+
+# 
+#                           address       lon       lat
+#                           <chr>         <dbl>     <dbl>
+# 1401 Pennsylvania Ave NW, Washington DC -77.03227 38.89660
+# 1331 Pennsylvania Ave NW, Washington DC -77.03084 28.89636
+```
+
+```{r q4c}
+question("How would you create a new map with these hotels added as points?",
+         answer("inaug_route_map + geom_point(data = dc_hotels,aes(x = lon,y = lat))",correct = TRUE),
+         answer("inauguration_route + geom_point(data = dc_hotels,aes(x = lon,y = lat))"),
+         answer("inaug_route_map + geom_point(dc_hotels,aes(x = lon,y = lat))"),
+         answer("inauge_route_map + geom_point(aes(x = lon,y = lat))"))
+```
+
+### Question 5.
+
+```{r q5}
+question("What is a shapefile?",
+         answer("An object created using the get_map function from the ggmap package."),
+         answer("A format for saving spatial data. The format is not specific to R, but shapefiles can be 
+                 read into or written from R using from packages like rgdal.",correct = TRUE),
+         answer("An interactive map created using leaflet."),
+         answer("An object created using ggmap."),
+         answer("A spatial object in R, with slots for an associated data frame as well as for other elements 
+                like a bounding box."))
+```
+### Question 6.
+
+```{r q6}
+question("Why might you get an error running the following code?<pre>
+         library(ggmap)
+         get_map('Washington, DC')</pre>",
+         answer("Your computer is offline. The get_map function using the Google Maps API to 
+                pull the requested map into R. The function cannot post the request or 
+                receive the requested map if your computer is not online.",correct = TRUE),
+         answer("You must use longitude and latitude to request a map from the Google Maps API 
+                using this function."),
+         answer("You have not initialized a ggplot object."),
+         answer("You have not initialized a ggmap object."))
+```
+### Question 7.
+
+```{r q7}
+question("TRUE or FALSE: To use data you have cleaned in R to create an interactive plot, you must 
+         export the data and code the interactive plot in Javascript.",
+         answer("TRUE"),answer("FALSE",correct = TRUE))
+```
+
+### Question 8.
+
+```{r q8}
+question("In which of the following formats can you interact (zoom, pan, open, popups) with a map 
+         created using the leaflet package?",
+         answer("If you include the leaflet output in an R Markdown document that is rendered to HTML.",correct = TRUE),
+         answer("If you include the leaflet output in an R Markdown document that is rendered to Word"),
+         answer("If you include the leaflet output in an R Markdown document that is rendered to pdf."),
+         answer("If you run the leaflet code in RStudio",correct = TRUE),
+         answer("If you render the leaflet object in a Shiny App.",correct = TRUE))
+```
+
+### Question 9. 
+
+```{r q9}
+question_checkbox("You have data with the spatial locations (e.g. sampling sites for a study) that you 
+         want to use to create an interactive leaflet map.</br></br>Which of the following statements is true?",
+         answer("If the data is in a data frame, the columns for latitude and longitude must be named 
+                lat and lng respectively.",correct = FALSE),
+         answer("The data can be in either a data frame with columns for latitude and longitude or a 
+                SpatialPoints object.",correct = TRUE),
+         answer("You must specify a bounding box for the leaflet map to start zoomed in on the points you've mapped 
+                when the map is first rendered."),
+         answer("The data must be in a SpatialPoints object, not a data frame."),
+         answer("The data must be in a data frame with columns for latitude and logitude, not a spatial object."))
+```
+
+### Question 10.
+
+<b>Say you use the following code to plot a choropleth of murder arrests per 100,000 people in US 
+states in 1973:</b>
+
+```{r q10a,eval = FALSE,echo = TRUE}
+library(ggplot2)
+library(dplyr)
+USArrests %>% 
+    mutate(region = tolower(rownames(USArrests))) %>%
+    left_join(map_data("state"),by = "region") %>% 
+    ggplot(aes(x = long,y = lat,group = group,fill = Murder)) + 
+    geom_polygon() + 
+    theme_void()
+```
+
+```{r 10b}
+question("Which of the following statements are true about this code?",
+         answer("The code is using piping (using %>% from the dplyr package) to clean up and join together 
+                geospatial data (state borders) with the USArrests data frame, and the piping this into 
+                ggplot2 functions to create the map.",correct = TRUE),
+         answer("The data on state boundaries used to create this map must be in spatial object."),
+         answer("The theme is added to the ggplot object to prevent x- and y-axes, x- and y-axis labels, and 
+                the background grid from being included on the final map.",correct = TRUE),
+         answer("The theme is added to the ggplot object to creal off previous points plotted on the object."),
+         answer("The map would have looked exactly the same if the Murder variable were mapped to the color rather 
+                than fill"),
+         answer("The group aesthetic is mapped to the group column in the data to create separate polygons for 
+                each state and to prevent unwanted lines between the borders of different states.",correct = TRUE))
+```
