@@ -15,8 +15,3 @@ Install courses:
 
 * swirl::install_course("The R Programming Environment")
 * swirl::install_course("Advanced R Programming")
-
-
-### Data Sets For Building Data Visualization Tools
-
-[here](bit.ly/3NLFfHD)

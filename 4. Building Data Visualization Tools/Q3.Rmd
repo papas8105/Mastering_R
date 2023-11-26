@@ -24,6 +24,8 @@ question("You want to customize the color scale, theme elements, and include a m
          answer("No, you do not need to code this plot in grid graphics (although you could).",correct = TRUE))
 ```
 
+### Question 2.
+
 ```{r q2}
 question_checkbox("Which of the following types of objects are created with grid graphics, either directly or 
                   using a package build on grid graphics?",
@@ -34,27 +36,25 @@ question_checkbox("Which of the following types of objects are created with grid
                   answer("A ggplot object.",correct = TRUE))
 ```
 
+### Question 3.
+
 ```{r q3}
 question("How can you customize the aesthetics of a grob, like color and line style, when creating the grob?",
          answer("Use key-value pairs within a list as the input to the aes parameter of the grob family function. 
                 For example: <pre>
-                circleGrob(x = 0.5,y = 0.5,r = 0.5,
-                    aes(list(col = 'grey')))
+                circleGrob(x = 0.5,y = 0.5,r = 0.5,aes(list(col = 'grey')))
                 </pre>"),
          answer("Add an aesthetic statement, using the aes, function, to the grob once it's been created. For 
                 example: <pre>
-                circleGrob(x = 0.5,y = 0.5,r = 0.5) + 
-                    aes = list(col = 'grey')
+                circleGrob(x = 0.5,y = 0.5,r = 0.5) + aes = list(col = 'grey')
                 </pre>"),
          answer("Use key-value pairs within a call to the gpar function as the input to the gp parameter of the 
                 grob family function. For example: <pre>
-                circleGrob(x= 0.5,y = 0.5,r = 0.5,
-                    gp = gpar(col = 'grey'))
+                circleGrob(x= 0.5,y = 0.5,r = 0.5,gp = gpar(col = 'grey'))
                 </pre>",correct = TRUE),
          answer("Use key-value pairs within a call to the aes function as the input to the gp parameter of the 
                 grob family function. For example: <pre>
-                circleGrob(x = 0.5,y = 0.5,r = 0.5,
-                    gp = aes(col = 'grey')
+                circleGrob(x = 0.5,y = 0.5,r = 0.5,gp = aes(col = 'grey')
                 </pre>"))
 ```
 
@@ -105,7 +105,7 @@ question("Which of the following are possible units that can be used with grid g
 
 ### Question 9.
 
-```{r q9} # wrong
+```{r q9}
 question("If you have to integrate base graphics and grid graphics output, what is the name of the package 
          that can be used to do that?",
          answer("ggplot2"),answer("grid"),answer("gridExtra"),answer("gridBase",correct = TRUE))

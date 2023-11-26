@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 </style>
 
 ### Question 1.
+
 <b>Consider the following data frame of points along the US border.</b>
 
 ```{r q1a,echo = TRUE}
@@ -120,6 +121,7 @@ question("What is a shapefile?",
          answer("A spatial object in R, with slots for an associated data frame as well as for other elements 
                 like a bounding box."))
 ```
+
 ### Question 6.
 
 ```{r q6}
@@ -134,6 +136,7 @@ question("Why might you get an error running the following code?<pre>
          answer("You have not initialized a ggplot object."),
          answer("You have not initialized a ggmap object."))
 ```
+
 ### Question 7.
 
 ```{r q7}
